@@ -20,6 +20,11 @@ case class vSymbol(name : String) extends Value{
 
 object vSymbol{
   implicit def stringToSymbol(name : String) = vSymbol(name)
+  
+  implicit def toSymbol(v : Value) : vSymbol = v match {
+    case v : vSymbol => v
+    case _ => throw new InvalidTypeException[vSymbol](v)
+  }
 }
 
 case class vNumber(value : Double) extends Value {

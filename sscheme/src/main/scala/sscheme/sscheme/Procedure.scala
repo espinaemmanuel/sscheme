@@ -7,7 +7,7 @@ import sscheme.sscheme.ListUtils._
 import sscheme.sscheme.types.vNumber._
 
 trait Procedure extends Value {  
-  def apply(args : Pair, env : Environment) : Value
+  def apply(interpreter: SScheme, args : Pair) : Value
 
 }
 

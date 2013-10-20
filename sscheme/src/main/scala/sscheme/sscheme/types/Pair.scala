@@ -4,6 +4,7 @@ import scala.collection.mutable.Builder
 import scala.collection.mutable.ListBuffer
 import scala.collection.generic.CanBuildFrom
 import scala.annotation.tailrec
+import sscheme.sscheme.InvalidTypeException
 
 case class Pair(first: Value, rest: Value) extends Value with Iterable[Value] {
      
@@ -48,6 +49,11 @@ case class Pair(first: Value, rest: Value) extends Value with Iterable[Value] {
 object Pair {
   
   import sscheme.sscheme.ListUtils._
+  
+  implicit def toPair(v : Value) : Pair = v match {
+    case v : Pair => v
+    case _ => throw new InvalidTypeException[Pair](v)
+  }
   
   implicit object PairCBF extends CanBuildFrom[Iterable[Value], Value, Pair] {
 
